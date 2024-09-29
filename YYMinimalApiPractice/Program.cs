@@ -1,19 +1,17 @@
-using Microsoft.AspNetCore.Builder;
 using YYMinimalApiPractice.Endpoints;
+using YYMinimalApiPractice.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
 
 app.UseHttpsRedirection();
 
