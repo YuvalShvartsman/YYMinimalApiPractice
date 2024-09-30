@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace YYMinimalApiPractice.Endpoints
+namespace YYMinimalApiPractice.Models
 {
-    public record User
+    public record UserModel
     {
-
         public required string Id { get; set; }
         public required string Name { get; set; }
     }
