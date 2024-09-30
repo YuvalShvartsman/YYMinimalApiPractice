@@ -36,25 +36,35 @@ namespace YYMinimalApiPractice.Endpoints
         }
         private static IResult CreateUser(UserCreateUpdate user)
         {
-            var userToCreate = new UserModel { Id = Guid.NewGuid().ToString(), Name = user.Name };
-            _usersSample.Add(userToCreate);
-            return Results.Ok(user);
+            var newUser = new UserModel { Id = Guid.NewGuid().ToString(), Name = user.Name };
+            _usersSample.Add(newUser);
+            var userDto = new User { Id = newUser.Id, Name = newUser.Name };
 
+            return Results.Created($"/users/{newUser.Id}", userDto);
         }
         private static IResult UpdateUser(UserCreateUpdate user, string id)
         {
             var indexToUpdate = _usersSample.FindIndex(element => element.Id == id);
-            _usersSample[indexToUpdate] = new UserModel { Id = id, Name = user.Name };
-            return Results.Ok(user);
+            if (indexToUpdate == -1) return Results.NotFound();
+
+            var updatedUser = new UserModel { Id = id, Name = user.Name };
+            _usersSample[indexToUpdate] = updatedUser;
+
+            var userDto = new User { Id = updatedUser.Id, Name = updatedUser.Name };
+
+            return Results.Ok(userDto);  
 
         }
         private static IResult DeleteUser(string id)
         {
-            if (id == null) return Results.NotFound();
+            if (id == null) return Results.BadRequest("Invalid user ID.");
+
             var userToDelete = _usersSample.FirstOrDefault(element => id == element.Id);
-            if (userToDelete != null)
-                _usersSample.Remove(userToDelete);
-            return Results.Ok();
+            if (userToDelete == null) return Results.NotFound();
+
+            _usersSample.Remove(userToDelete);
+
+            return Results.NoContent();
 
         }
     }
