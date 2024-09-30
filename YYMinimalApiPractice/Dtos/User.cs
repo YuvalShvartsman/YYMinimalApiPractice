@@ -4,9 +4,14 @@ namespace YYMinimalApiPractice.Dtos
 {
     public record User
     {
-        public required string Id { get; init; }
-        public required string Name { get; init; }
+        public  string Id { get; init; }
+        public  string Name { get; init; }
 
+        public User(UserModel userModel)
+        {
+            Id = userModel.Id;
+            Name = userModel.Name;
+        }
     }
     public record UserCreateUpdate
     {

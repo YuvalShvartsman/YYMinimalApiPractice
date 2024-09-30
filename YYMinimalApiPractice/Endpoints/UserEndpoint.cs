@@ -28,7 +28,7 @@ namespace YYMinimalApiPractice.Endpoints
             var user = _usersSample.Find(element => id == element.Id);
             if (user != null)
             {
-                var userDto = new User { Id = user.Id, Name = user.Name };
+                var userDto = new User(user);
                 return Results.Ok(userDto);
             }
             return Results.NotFound();
@@ -38,7 +38,7 @@ namespace YYMinimalApiPractice.Endpoints
         {
             var newUser = new UserModel { Id = Guid.NewGuid().ToString(), Name = user.Name };
             _usersSample.Add(newUser);
-            var userDto = new User { Id = newUser.Id, Name = newUser.Name };
+            var userDto = new User (newUser);
 
             return Results.Created($"/users/{newUser.Id}", userDto);
         }
@@ -50,7 +50,7 @@ namespace YYMinimalApiPractice.Endpoints
             var updatedUser = new UserModel { Id = id, Name = user.Name };
             _usersSample[indexToUpdate] = updatedUser;
 
-            var userDto = new User { Id = updatedUser.Id, Name = updatedUser.Name };
+            var userDto = new User(updatedUser);
 
             return Results.Ok(userDto);  
 
