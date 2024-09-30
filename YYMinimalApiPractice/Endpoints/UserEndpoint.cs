@@ -28,22 +28,23 @@ namespace YYMinimalApiPractice.Endpoints
             var user = _usersSample.Find(element => id == element.Id);
             if (user != null)
             {
-                var userDto = new User({ Id = user.Id, Name = user.Name });
+                var userDto = new User { Id = user.Id, Name = user.Name };
                 return Results.Ok(userDto);
             }
             return Results.NotFound();
 
         }
-        private static IResult CreateUser(UserModel user)
+        private static IResult CreateUser(User user)
         {
-            _usersSample.Add(user);
+            var userToCreate = new UserModel { Id=user.Id, Name=user.Name };    
+            _usersSample.Add(userToCreate);
             return Results.Ok(user);
 
         }
-        private static IResult UpdateUser(UserModel user)
+        private static IResult UpdateUser(User user )
         {
             var indexToUpdate = _usersSample.FindIndex(element => element.Id == user.Id);
-            _usersSample[indexToUpdate] = user;
+            _usersSample[indexToUpdate] = new UserModel { Id  =user.Id , Name=user.Name};
             return Results.Ok(user);
 
         }
