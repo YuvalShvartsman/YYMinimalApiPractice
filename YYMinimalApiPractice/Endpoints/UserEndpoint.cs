@@ -21,16 +21,15 @@ namespace YYMinimalApiPractice.Endpoints
             userGroup.MapDelete("/{id}", DeleteUser);
         }
         private static IResult GetAllUsers()
-            => Results.Ok(_usersSample);
-
+        {
+            var userDtos = _usersSample.Select(userModel => new User(userModel)).ToList();
+            return Results.Ok(userDtos);
+        }
         private static IResult GetUserById(string id)
         {
             var user = _usersSample.Find(element => id == element.Id);
             if (user != null)
-            {
-                var userDto = new User(user);
-                return Results.Ok(userDto);
-            }
+                return Results.Ok(new User(user));
             return Results.NotFound();
 
         }
@@ -50,9 +49,7 @@ namespace YYMinimalApiPractice.Endpoints
             var updatedUser = new UserModel { Id = id, Name = user.Name };
             _usersSample[indexToUpdate] = updatedUser;
 
-            var userDto = new User(updatedUser);
-
-            return Results.Ok(userDto);  
+            return Results.Ok(new User(updatedUser));  
 
         }
         private static IResult DeleteUser(string id)
