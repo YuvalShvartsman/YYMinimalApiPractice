@@ -34,17 +34,17 @@ namespace YYMinimalApiPractice.Endpoints
             return Results.NotFound();
 
         }
-        private static IResult CreateUser(User user)
+        private static IResult CreateUser(UserCreateUpdate user)
         {
-            var userToCreate = new UserModel { Id=user.Id, Name=user.Name };    
+            var userToCreate = new UserModel { Id = Guid.NewGuid().ToString(), Name = user.Name };
             _usersSample.Add(userToCreate);
             return Results.Ok(user);
 
         }
-        private static IResult UpdateUser(User user )
+        private static IResult UpdateUser(UserCreateUpdate user, string id)
         {
-            var indexToUpdate = _usersSample.FindIndex(element => element.Id == user.Id);
-            _usersSample[indexToUpdate] = new UserModel { Id  =user.Id , Name=user.Name};
+            var indexToUpdate = _usersSample.FindIndex(element => element.Id == id);
+            _usersSample[indexToUpdate] = new UserModel { Id = id, Name = user.Name };
             return Results.Ok(user);
 
         }
