@@ -1,5 +1,4 @@
 ﻿
-using YYMinimalApiPractice.Dtos;
 
 namespace YYMinimalApiPractice.Models
 {
