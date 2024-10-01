@@ -14,6 +14,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapUserEndpoints();
+app.MapTodoEndpoints();
 
 app.Run();
 

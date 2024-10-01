@@ -19,7 +19,7 @@ namespace YYMinimalApiPractice.Dtos
     public record TodoCreateUpdate
     {
         public required string Title { get; init; }
-        public required string IsCompleted { get; init; }
+        public required bool IsCompleted { get; init; }
 
     }
 
