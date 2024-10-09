@@ -3,7 +3,7 @@ using YYMinimalApiPractice.Data;
 using YYMinimalApiPractice.Dtos;
 using YYMinimalApiPractice.Models;
 
-namespace YYMinimalApiPractice.Services
+namespace YYMinimalApiPractice.Services.UsersService
 {
     public class UserService : IUserService
     {
@@ -41,16 +41,16 @@ namespace YYMinimalApiPractice.Services
             }
         }
 
-        public async Task<IResult> CreateUser(UserCreateUpdate user)
+        public async Task<IResult> CreateUser(UserCreateOrUpdate user)
         {
             try
             {
-                var newUser = new UserModel { Name = user.Name }; 
+                var newUser = new UserModel { Name = user.Name };
                 await _context.User.AddAsync(newUser);
                 await _context.SaveChangesAsync();
                 var userDto = new User(newUser);
 
-                return Results.Created($"/users/{newUser.Id}", userDto); 
+                return Results.Created($"/users/{newUser.Id}", userDto);
             }
             catch (Exception ex)
             {
@@ -59,7 +59,7 @@ namespace YYMinimalApiPractice.Services
         }
 
 
-        public async Task<IResult> UpdateUser(int id, UserCreateUpdate updatedUser)
+        public async Task<IResult> UpdateUser(int id, UserCreateOrUpdate updatedUser)
         {
             try
             {

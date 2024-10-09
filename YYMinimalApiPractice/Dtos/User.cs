@@ -13,7 +13,7 @@ namespace YYMinimalApiPractice.Dtos
             Name = userModel.Name;
         }
     }
-    public record UserCreateUpdate
+    public record UserCreateOrUpdate
     {
         public required string Name { get; init; }
     }

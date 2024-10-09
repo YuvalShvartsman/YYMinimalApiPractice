@@ -1,5 +1,5 @@
 ﻿using YYMinimalApiPractice.Dtos;
-using YYMinimalApiPractice.Services;
+using YYMinimalApiPractice.Services.UsersService;
 
 namespace YYMinimalApiPractice.Endpoints
 {
@@ -23,10 +23,10 @@ namespace YYMinimalApiPractice.Endpoints
         private static async Task<IResult> GetUserById(IUserService userService, int id) =>
             await userService.GetUserById(id);
 
-        private static async Task<IResult> CreateUser(IUserService userService, UserCreateUpdate user) =>
+        private static async Task<IResult> CreateUser(IUserService userService, UserCreateOrUpdate user) =>
             await userService.CreateUser(user);
 
-        private static async Task<IResult> UpdateUser(IUserService userService, int id, UserCreateUpdate updatedUser) =>
+        private static async Task<IResult> UpdateUser(IUserService userService, int id, UserCreateOrUpdate updatedUser) =>
             await userService.UpdateUser(id, updatedUser);
 
         private static async Task<IResult> DeleteUser(IUserService userService, int id) =>

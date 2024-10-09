@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using YYMinimalApiPractice.Data;
 using YYMinimalApiPractice.Endpoints;
 using YYMinimalApiPractice.Extentions;
-using YYMinimalApiPractice.Services;
+using YYMinimalApiPractice.Services.UsersService;
 
 var builder = WebApplication.CreateBuilder(args);
 
