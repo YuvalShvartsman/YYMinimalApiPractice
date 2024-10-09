@@ -4,7 +4,7 @@ namespace YYMinimalApiPractice.Dtos
 {
     public record User
     {
-        public  string Id { get; init; }
+        public  int Id { get; init; }
         public  string Name { get; init; }
 
         public User(UserModel userModel)

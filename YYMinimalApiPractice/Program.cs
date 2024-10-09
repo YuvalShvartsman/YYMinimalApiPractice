@@ -2,11 +2,14 @@ using Microsoft.EntityFrameworkCore;
 using YYMinimalApiPractice.Data;
 using YYMinimalApiPractice.Endpoints;
 using YYMinimalApiPractice.Extentions;
+using YYMinimalApiPractice.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("postgressql")));
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddSwagger();
 

@@ -23,8 +23,11 @@ namespace YYMinimalApiPractice.Migrations
 
             modelBuilder.Entity("YYMinimalApiPractice.Models.TodoModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("boolean");
@@ -40,8 +43,11 @@ namespace YYMinimalApiPractice.Migrations
 
             modelBuilder.Entity("YYMinimalApiPractice.Models.UserModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()

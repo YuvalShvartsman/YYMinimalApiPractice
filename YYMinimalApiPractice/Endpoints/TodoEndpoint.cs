@@ -7,11 +7,11 @@ namespace YYMinimalApiPractice.Endpoints
     {
         private static readonly List<TodoModel> _todosSample =
          [
-             new TodoModel{Id ="0",Title="Brush my teetch" , IsCompleted=false },
-             new TodoModel{Id ="1",Title="Drink coffee" , IsCompleted=false },
-             new TodoModel{Id ="2",Title="Eat protein yogurt" , IsCompleted=false },
-             new TodoModel{Id ="3",Title="Drink coffee again" , IsCompleted=false },
-             new TodoModel{Id ="4",Title="Write code" , IsCompleted=false },
+             new TodoModel{Id =0,Title="Brush my teetch" , IsCompleted=false },
+             new TodoModel{Id =1,Title="Drink coffee" , IsCompleted=false },
+             new TodoModel{Id =2,Title="Eat protein yogurt" , IsCompleted=false },
+             new TodoModel{Id =3,Title="Drink coffee again" , IsCompleted=false },
+             new TodoModel{Id =4,Title="Write code" , IsCompleted=false },
         ];
         public static void MapTodoEndpoints(this WebApplication app)
         {
@@ -27,7 +27,7 @@ namespace YYMinimalApiPractice.Endpoints
             var todoDtos = _todosSample.Select(todoModel => new Todo(todoModel)).ToList();
             return Results.Ok(todoDtos);
         }
-        private static IResult GetTodoById(string id)
+        private static IResult GetTodoById(int id)
         {
             var todo = _todosSample.Find(element => id == element.Id);
             if (todo != null)
@@ -37,14 +37,14 @@ namespace YYMinimalApiPractice.Endpoints
         }
         private static IResult CreateTodo(TodoCreateUpdate todo)
         {
-            var newTodo = new TodoModel { Id = Guid.NewGuid().ToString(), Title = todo.Title ,IsCompleted= todo.IsCompleted  };
+            var newTodo = new TodoModel { Id = 1, Title = todo.Title ,IsCompleted= todo.IsCompleted  };
             _todosSample.Add(newTodo);
             var todoDto = new Todo(newTodo);
 
             return Results.Created($"/todos/{newTodo.Id}", todoDto);
         }
 
-        private static IResult UpdateTodo(TodoCreateUpdate todo, string id)
+        private static IResult UpdateTodo(TodoCreateUpdate todo, int id)
         {
             var indexToUpdate = _todosSample.FindIndex(element => element.Id == id);
             if (indexToUpdate == -1) return Results.NotFound();
@@ -56,7 +56,7 @@ namespace YYMinimalApiPractice.Endpoints
 
         }
 
-        private static IResult DeleteTodo(string id)
+        private static IResult DeleteTodo(int id)
         {
             if (id == null) return Results.BadRequest("Invalid todo ID.");
 
