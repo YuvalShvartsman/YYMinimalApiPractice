@@ -5,8 +5,8 @@ namespace YYMinimalApiPractice.Data
 {
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        public DbSet<UserModel> Users { get; set; }
-        public DbSet<TodoModel> Todos { get; set; }
+        public DbSet<UserModel> User { get; set; }
+        public DbSet<TodoModel> Todo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
