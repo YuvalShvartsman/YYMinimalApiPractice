@@ -45,7 +45,13 @@ namespace YYMinimalApiPractice.Services.TodosService
         {
             try
             {
-                var newTodo = new TodoModel { Title = todo.Title,IsCompleted=todo.IsCompleted };
+                var user = await _context.User.FindAsync(todo.UserId);
+                if (user == null)
+                {
+                    return Results.NotFound($"User with ID {todo.UserId} not found.");
+                }
+
+                var newTodo = new TodoModel { Title = todo.Title, IsCompleted = todo.IsCompleted, UserId = todo.UserId, User = user };
                 await _context.Todo.AddAsync(newTodo);
                 await _context.SaveChangesAsync();
                 var todoDto = new Todo(newTodo);

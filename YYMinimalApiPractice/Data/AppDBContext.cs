@@ -15,8 +15,6 @@ namespace YYMinimalApiPractice.Data
                 .WithOne(t => t.User)   
                 .HasForeignKey(t => t.UserId)  
                 .OnDelete(DeleteBehavior.Cascade); 
-
-            base.OnModelCreating(modelBuilder);
         }
     }
 }

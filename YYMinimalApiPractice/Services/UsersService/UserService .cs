@@ -45,7 +45,8 @@ namespace YYMinimalApiPractice.Services.UsersService
         {
             try
             {
-                var newUser = new UserModel { Name = user.Name };
+
+                var newUser = new UserModel { Name = user.Name, Todos = new List<TodoModel>() };
                 await _context.User.AddAsync(newUser);
                 await _context.SaveChangesAsync();
                 var userDto = new User(newUser);
