@@ -11,6 +11,6 @@ namespace YYMinimalApiPractice.Models
         public required string Name { get; set; }
 
         [Required]
-        public required List<TodoModel> Tasks { get; set; }
+        public required List<TodoModel> Todos { get; set; }
     }
 }
