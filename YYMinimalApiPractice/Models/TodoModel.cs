@@ -10,7 +10,11 @@ namespace YYMinimalApiPractice.Models
         [Required]
         public required string Title { get; set; }
 
-        [Required]
         public required bool IsCompleted { get; set; }
+
+        public int UserId { get; set; }
+
+        [Required]
+        public required UserModel User { get; set; }
     }
 }
