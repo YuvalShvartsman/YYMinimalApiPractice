@@ -12,6 +12,7 @@ namespace YYMinimalApiPractice.Dtos
 
         public Todo(TodoModel todo)
         {
+            Id = todo.Id;
             Title = todo.Title;
             IsCompleted = todo.IsCompleted;
             UserId = todo.UserId;  

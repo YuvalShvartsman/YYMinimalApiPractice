@@ -15,7 +15,8 @@ namespace YYMinimalApiPractice.Services.UsersService
         {
             try
             {
-                var users = await _context.User.ToListAsync();
+                var users = await _context.User.Include(u => u.Todos).ToListAsync();
+                
                 var userDtos = users.Select((user) => new User(user));
                 return Results.Ok(userDtos);
             }
@@ -29,7 +30,7 @@ namespace YYMinimalApiPractice.Services.UsersService
         {
             try
             {
-                var user = await _context.User.FindAsync(id);
+                var user = await _context.User.Include(u => u.Todos).FirstOrDefaultAsync(u => u.Id == id); 
                 if (user != null)
                     return Results.Ok(new User(user));
 
@@ -45,12 +46,11 @@ namespace YYMinimalApiPractice.Services.UsersService
         {
             try
             {
-
                 var newUser = new UserModel { Name = user.Name, Todos = new List<TodoModel>() };
                 await _context.User.AddAsync(newUser);
                 await _context.SaveChangesAsync();
-                var userDto = new User(newUser);
 
+                var userDto = new User(newUser);
                 return Results.Created($"/users/{newUser.Id}", userDto);
             }
             catch (Exception ex)
@@ -64,11 +64,12 @@ namespace YYMinimalApiPractice.Services.UsersService
         {
             try
             {
-                var existingUser = await _context.User.FindAsync(id);
+                var existingUser = await _context.User.Include(u => u.Todos).FirstOrDefaultAsync(u => u.Id == id);
                 if (existingUser == null)
                     return Results.NotFound();
 
                 existingUser.Name = updatedUser.Name;
+
                 await _context.SaveChangesAsync();
 
                 return Results.Ok(new User(existingUser));
